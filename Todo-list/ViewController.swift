@@ -12,9 +12,11 @@ class ViewController: NSViewController {
     @IBOutlet weak var textField: NSTextField!
     @IBOutlet weak var checkBox: NSButton!
     
+    var todoItems: [TodoItem] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getData()
         // Do any additional setup after loading the view.
     }
 
@@ -37,7 +39,20 @@ class ViewController: NSViewController {
             appDelegate.saveAction(nil)
             textField.stringValue = ""
             checkBox.state = .off
+            getData()
         }
+    }
+    
+    func getData() {
+        guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        do {
+            todoItems = try context.fetch(TodoItem.fetchRequest())
+        } catch {
+            
+        }
+        
     }
 }
 
