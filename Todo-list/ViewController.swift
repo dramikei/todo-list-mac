@@ -8,9 +8,11 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet weak var textField: NSTextField!
     @IBOutlet weak var checkBox: NSButton!
+    @IBOutlet weak var tableView: NSTableView!
+    
     
     var todoItems: [TodoItem] = []
     
@@ -52,7 +54,38 @@ class ViewController: NSViewController {
         } catch {
             
         }
+        tableView.reloadData()
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return todoItems.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let todoItem = todoItems[row]
+        if (tableColumn?.identifier)!.rawValue == "importantColumn" {
+            
+            guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "importantCell"), owner: self) as? NSTableCellView else { return nil }
+            
+            if todoItem.important{
+                cell.textField?.stringValue = "❗️"
+            } else {
+                cell.textField?.stringValue = ""
+            }
+            
+            return cell
+            
+        } else {
+            guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "todoItems"), owner: self) as? NSTableCellView else { return nil }
+            
+            
+            cell.textField?.stringValue = todoItem.name!
+            return cell
+        }
         
     }
+    
+    
+    
 }
 
