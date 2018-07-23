@@ -25,25 +25,19 @@ class ViewController: NSViewController {
     }
     @IBAction func addClicked(_ sender: NSButton) {
         if textField.stringValue != "" {
-            let appDelegate = (NSApplication.shared.delegate as? AppDelegate)
-            if let context = appDelegate?.persistentContainer.viewContext {
-                let todoItem = TodoItem(context: context)
-                todoItem.name = textField.stringValue
-                if checkBox.state == .off {
-                    todoItem.important = false
-                    print("Not important")
-                } else if checkBox.state == .on {
-                    todoItem.important = true
-                    print("important")
-                }
-                appDelegate?.saveAction(nil)
-                textField.stringValue = ""
-                checkBox.state = .off
-                
+            guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { return }
+            let context = appDelegate.persistentContainer.viewContext
+            let todoItem = TodoItem(context: context)
+            todoItem.name = textField.stringValue
+            if checkBox.state == .off {
+                todoItem.important = false
+            } else if checkBox.state == .on {
+                todoItem.important = true
             }
+            appDelegate.saveAction(nil)
+            textField.stringValue = ""
+            checkBox.state = .off
         }
     }
-    
-
 }
 
