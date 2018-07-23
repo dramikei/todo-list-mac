@@ -799,7 +799,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="e1d-Yz-g4i" secondAttribute="height" multiplier="1:1" id="f86-95-Ife"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="KGG-MK-cEW">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.5" horizontal="YES" id="KGG-MK-cEW">
                                     <rect key="frame" x="1" y="213" width="228" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -873,10 +873,22 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WzL-qn-JEX">
+                                <rect key="frame" x="328" y="117" width="80" height="32"/>
+                                <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zPn-RC-pob">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deleteBtnClicked:" target="XfG-lQ-9wD" id="uoq-zQ-S47"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="WzL-qn-JEX" firstAttribute="top" secondItem="Dnp-2P-ATP" secondAttribute="bottom" constant="21" id="D13-9T-yak"/>
                             <constraint firstItem="Dnp-2P-ATP" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="PbP-M0-WL9"/>
                             <constraint firstItem="Dnp-2P-ATP" firstAttribute="leading" secondItem="e1d-Yz-g4i" secondAttribute="trailing" constant="38" id="fIw-2l-zLO"/>
+                            <constraint firstItem="WzL-qn-JEX" firstAttribute="centerX" secondItem="Dnp-2P-ATP" secondAttribute="centerX" id="g4l-bC-leN"/>
                             <constraint firstItem="e1d-Yz-g4i" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="gWc-LO-4zc"/>
                             <constraint firstAttribute="trailing" secondItem="Dnp-2P-ATP" secondAttribute="trailing" constant="32" id="p02-7I-TMn"/>
                             <constraint firstAttribute="bottom" secondItem="e1d-Yz-g4i" secondAttribute="bottom" constant="20" id="wVs-7X-kMH"/>
@@ -885,6 +897,7 @@
                     </view>
                     <connections>
                         <outlet property="checkBox" destination="b9G-ii-2Ty" id="pGZ-5P-RrS"/>
+                        <outlet property="deleteBtn" destination="WzL-qn-JEX" id="yyZ-om-Yf5"/>
                         <outlet property="tableView" destination="Ac3-xS-Dmk" id="geK-J8-K1P"/>
                         <outlet property="textField" destination="3G4-BO-whI" id="GbD-OS-VfQ"/>
                     </connections>

@@ -12,6 +12,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     @IBOutlet weak var textField: NSTextField!
     @IBOutlet weak var checkBox: NSButton!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var deleteBtn: NSButton!
     
     
     var todoItems: [TodoItem] = []
@@ -82,6 +83,22 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             cell.textField?.stringValue = todoItem.name!
             return cell
         }
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        deleteBtn.isHidden = false
+    }
+    
+    @IBAction func deleteBtnClicked(_ sender: Any) {
+        
+        let todoItem = todoItems[tableView.selectedRow]
+        
+        guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        context.delete(todoItem)
+        appDelegate.saveAction(nil)
+        getData()
+        deleteBtn.isHidden = true
         
     }
     
